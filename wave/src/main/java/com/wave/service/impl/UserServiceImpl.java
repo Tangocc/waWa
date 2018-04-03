@@ -4,6 +4,8 @@ import com.wave.bean.UserBean;
 import com.wave.dao.IUserDao;
 import com.wave.entity.UserEntity;
 import com.wave.service.IUserService;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,36 +24,20 @@ public class UserServiceImpl implements IUserService {
             return null;
         }
 
-        return convertEntity2Bean(userEntity);
-    }
-
-    public boolean addUser(UserBean userBean) {
-
-        UserEntity userEntity = convertBean2Entity(userBean);
-        iUserDao.insertUser(userEntity);
-        return true;
-    }
-
-
-
-    private UserBean convertEntity2Bean(UserEntity userEntity){
-
         UserBean userBean = new UserBean();
 
-        userBean.setUsername( userEntity.getUserName());
-        userBean.setPassword( userEntity.getPassword());
+        BeanUtils.copyProperties(userEntity,userBean);
 
         return userBean;
     }
 
-
-    private UserEntity convertBean2Entity(UserBean userBean){
+    public boolean addUser(UserBean userBean) {
 
         UserEntity userEntity = new UserEntity();
 
-        userEntity.setUserName( userBean.getUsername());
-
-        return userEntity;
-
+        BeanUtils.copyProperties(userBean,userEntity);
+        iUserDao.insertUser(userEntity);
+        return true;
     }
+
 }

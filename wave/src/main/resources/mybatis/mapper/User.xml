@@ -7,11 +7,11 @@
 
 
 
-    <select id="findUserByName" parameterType="String" resultMap="com.wave.entity.UserEntity">
+    <select id="findUserByName" parameterType="String" resultType="com.wave.entity.UserEntity">
       SELECT uid,username,password FROM User_Table WHERE username = #{username} AND status = 0
     </select>
 
     <insert id="insertUser" parameterType="com.wave.entity.UserEntity" >
-        INSERT INTO User_Table(usernmae,password) VALUES (#{userEntity.username},#{password})
+        INSERT INTO User_Table(username,password) VALUES (#{userEntity.username},#{userEntity.password})
     </insert>
 </mapper>

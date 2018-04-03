@@ -3,6 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="xx">
+<mapper namespace="com.wave.dao.IUserDao">
 
+
+
+    <select id="findUserByName" parameterType="String" resultType="com.wave.entity.UserEntity">
+      SELECT uid,username,password FROM User_Table WHERE username = #{username} AND status = 0
+    </select>
+
+    <insert id="insertUser" parameterType="com.wave.entity.UserEntity" >
+        INSERT INTO User_Table(username,password) VALUES (#{userEntity.username},#{userEntity.password})
+    </insert>
 </mapper>

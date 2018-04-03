@@ -1,6 +1,7 @@
 package com.wave.dao;
 
 import com.wave.entity.UserEntity;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,7 +16,7 @@ public interface IUserDao {
   UserEntity findUserByName(String username);
 
 
-  boolean insertUser(UserEntity userEntity);
+  boolean insertUser(@Param("userEntity") UserEntity userEntity);
 
 
 }
